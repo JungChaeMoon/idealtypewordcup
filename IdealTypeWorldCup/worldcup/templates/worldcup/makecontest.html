@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if contest %}
+        {% for name in contest %}
+            <ul>
+                <li><a href="{% url 'worldcup:make_worldcup' name.id %}">{{ name.worldcup_name }}</a></li>
+            </ul>
+        {% endfor %}
+    {% endif %}
+
+    <form action="{% url 'worldcup:middle' %}" method ="post">
+    {% csrf_token %}
+        <input type="text" name="contest" id="contest">
+        <input type="submit" name="submit" id="submit" value="zechul">
+    </form>
+{% endblock %}

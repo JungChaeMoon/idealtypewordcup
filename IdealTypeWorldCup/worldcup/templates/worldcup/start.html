@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<script type="text/javascript">
+    var list = {{ new_item_list | safe}};
+
+
+
+    $(document).ready(function () {
+
+        $('#starRating').attr("src", list[0].photo);
+        $('')
+
+        $('#starRating1 img').click(function () {
+            alert('qq')
+        });
+        $('#starRating2 img').click(function () {
+           alert('zz')
+        });
+    });
+    {% comment %}
+    $('#starRating img').attr("src", {{ new_item_list. }})
+        {% endcomment %}
+</script>
+
+    <img id="starRating1">
+    <IMG ID="starRating2">
+{% comment %}
+
+            <button style="border: 0; background-color: white; height: 600px; width: 600px;" type="submit" name="photo" id="{{ item.title }}" value="{{ item.title }}">
+                <img id="{{ item.title }}" name="{{ item.title }}" src="{{ item.photo.url }}" alt="" width="100%"></button>
+
+<form name="select" enctype="multipart/form-data" id="select" method="post">
+        {% csrf_token %}
+    {% for item in item_list%}
+            <h2>{{ item.title }}</h2>
+            <button style="border: 0; background-color: white; height: 600px; width: 600px;" type="submit" name="photo" id="{{ item.title }}" value="{{ item.title }}">
+                <img id="{{ item.title }}" name="{{ item.title }}" src="{{ item.photo.url }}" alt="" width="100%"></button>
+    {% endfor %}
+</form>
+
+
+    <form name="select" enctype="multipart/form-data" id="select" method="post" action="{% url 'worldcup:ajax_view' %}">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#{{ item.title }}').click(function () {
+                var queryString = $('#select').serialize();
+                alert(queryString);
+                $.ajax({
+                    url:{% url 'worldcup:ajax_view' contest.id %},
+                    data: queryString,
+                    dataType:'json',
+                    type:'POST',
+                    cache:false,
+                    processData: false,
+                    success: function (data) {
+                        alert('zzz');
+                    }
+                    ,error:function (error) {
+                        alert('ㅠㅠ');
+                    }
+                })
+            })
+        });
+    </script>
+{% endcomment %}
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data" action="{% url 'worldcup:upload_file' contest.id %}">
+    {% csrf_token %}
+
+        {% comment %}
+        꼐름칙 셀렉부분
+
+        <select name="contest">
+            <option value="">worldcup</option>
+            {% for contest in contest_list %}
+                <option value="{{ contest.worldcup_name }}">{{ contest.worldcup_name }}</option>
+            {% endfor %}
+        </select>
+        {% endcomment %}
+        {% comment %}
+        <input type="text" name="contest" id="content">
+        <input type="button" name="submit" id="submit" value="제출!">
+        {% endcomment %}
+        <table>
+            {{ form.as_p }}
+        </table>
+    <input type="submit" name="submit" id="submit" value="upload!">
+
+    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <form  method="post" action="{% url 'worldcup:make_quit' %}">
+    {% csrf_token %}
+        <input type="submit" name="submit" value="만들기 종료!">
+    </form>
+{% endblock %}

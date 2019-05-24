@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>하고싶은 월드컵을 골라주세요!</h1>
+
+    {% for contest in contest_list %}
+        <ul>
+            <li><a href="{% url 'worldcup:start' contest.id %}">{{ contest.worldcup_name }}</a></li>
+        </ul>
+    {% endfor %}
+{% endblock %}
