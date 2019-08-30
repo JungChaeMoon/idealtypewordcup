@@ -4,28 +4,64 @@
 
 <script type="text/javascript">
     var list = {{ new_item_list | safe}};
+    var i=0;
+    var j= i+1;
+    var t=0;
+    var list_length = list.length;
+
 
 
 
     $(document).ready(function () {
 
-        $('#starRating').attr("src", list[0].photo);
-        $('')
+        $('#starRating1').attr("src", list[i].photo);
+        $('#starRating2').attr("src",list[i+1].photo);
 
-        $('#starRating1 img').click(function () {
-            alert('qq')
+        i++;
+
+        $('#starRating2').click(function () {
+
+                $('#starRating2').data("pk",list[i].pk);
+
+            i++;
+
+            if(i>=list_length){
+                window.location.href = "http://127.0.0.1:8000/worldcup/result/" + {{ contest_id }} +"?pk=" + $('#starRating2').data("pk") ;
+                {#window.location.href = "http://127.0.0.1:8000/result/"+$('#starRating2').data("pk") ;#}
+            }
+            $('#starRating1').attr("src", list[i].photo);
+
         });
-        $('#starRating2 img').click(function () {
-           alert('zz')
+
+        $('#starRating1').click(function () {
+
+            $('#starRating1').data("pk",list[i].pk);
+            i++;
+          //  if(i>=list_length){
+            //    windows.location.href = "http://127.0.0.1:8000/result/" + "?pk=" + $('#starRating1').data("pk");
+           // }
+
+            if(i>=list_length){
+               window.location.href = "http://127.0.0.1:8000/worldcup/result/"+ {{ contest_id }} + "?pk=" + $('#starRating1').data("pk");
+            }
+            $('#starRating2').attr("src", list[i].photo);
+
+
+
         });
+
     });
+
     {% comment %}
     $('#starRating img').attr("src", {{ new_item_list. }})
         {% endcomment %}
 </script>
 
+
     <img id="starRating1">
-    <IMG ID="starRating2">
+
+    <img id="starRating2">
+
 {% comment %}
 
             <button style="border: 0; background-color: white; height: 600px; width: 600px;" type="submit" name="photo" id="{{ item.title }}" value="{{ item.title }}">

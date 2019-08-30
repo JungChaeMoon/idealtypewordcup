@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if contest %}
+
         {% for name in contest %}
             <ul>
                 <li><a href="{% url 'worldcup:make_worldcup' name.id %}">{{ name.worldcup_name }}</a></li>
             </ul>
         {% endfor %}
-    {% endif %}
+
 
     <form action="{% url 'worldcup:middle' %}" method ="post">
     {% csrf_token %}

@@ -2,10 +2,8 @@ from django.shortcuts import render,reverse, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import CandidateForm
 from .models import Contest, Candidate
-from django.core.serializers import serialize
 import json
 import random
-# Create your views here.
 
 
 def worldcup_view(request, *args, **kwargs):
@@ -28,31 +26,9 @@ def start(request, contest_id):
 
     new_item_list = json.dumps(list, ensure_ascii=False)
     count = contest.candidate_set.all().count()
-    context = {'new_item_list' : new_item_list, 'item_list': item_list,'count' : count}
+    context = {'new_item_list': new_item_list, 'contest_id': contest_id, 'count' : count}
     return render(request, 'worldcup/start.html', context)
 
-
-#def ajax_view(request, *args, **kwargs):
-
-    #data = request.POST.get('photo', '')
-    #contest = get_object_or_404(Contest, pk=contest_id)
-    #item_list = contest.candidate_set.all()
-#    item_list.filter(title=data).delete()
-    #context = {'item_list': item_list}
- #   if item_list.count() == 1:
-
- #       new_item_list = item_list
- #       context = {'item_list': new_item_list}
-    #return render(request, 'worldcup/final.html', context)
-#    pass
-#    else:
-
-#        new_item_list = item_list.order_by('?')[:2]
-#       context = {'item_list': new_item_list}
-
-#       return render(request, 'worldcup/start.html', context)
-
-    #return HttpResponseRedirect(re)
 
 def make_contest(request, *args, **kwargs):
 
@@ -75,10 +51,6 @@ def middle(request, *args, **kwargs):
 
 def make_worldcup(request, contest_id):
 
-#    contest = Contest()
-#    contest.worldcup_name = request.POST.get('contest', '')
-#    contest.save()
-    #key = int(''.join(map(str, args)), base=10)
 
     contest = get_object_or_404(Contest, pk=contest_id)
     form = CandidateForm()
@@ -106,6 +78,14 @@ def upload_file(request, contest_id):
     return render(request, 'worldcup/makeworldcup.html', context)
 
 
-def make_quit(request):
+def make_quit(request, pk):
 
-    return render(request,'worldcup/worldcup.html')
+    contest = get_object_or_404(Contest, pk=pk)
+
+    data = request.GET.get('pk', '')
+    new_data = int(data, base=10)
+    item = contest.candidate_set.filter(pk=new_data-1)
+
+    context = {'item': item, 'data': data}
+
+    return render(request,'worldcup/final.html',context)

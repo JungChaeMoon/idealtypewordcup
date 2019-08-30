@@ -1,4 +1,6 @@
 <!doctype html>
+{% load static %}
+
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -7,13 +9,54 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title>IdealType Worldcup!</title>
+
+    <style>
+
+    body{
+        background-image: url("{% static 'white.png' %}");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    #logo{
+        text-align: center;
+        padding: 50px;
+    }
+
+    #s_logo{
+        text-align: center;
+            padding: 30px;
+    }
+
+    </style>
+
 </head>
 <body>
-    <h1>Django images uploading</h1>
+    <audio src="{% static 'bgm.mp3' %}", autoplay></audio>
+
+    {% if logo %}
+
+    {% else %}
+
+        <div id="s_logo">
+            <img src="{% static 'mainlogo.png' %}", width=500px, height=auto>
+       </div>
+
+    {% endif %}
+
 {% block content %}
-    <a href="{% url 'worldcup:worldcup_view' %}">시작하기</a></a>
-    <br>
-    <a href="{% url 'worldcup:make_contest' %}">만들러가기</a>
+    <div id="logo">
+         <img src="{% static 'mainlogo.png' %}", width=800px, height=auto>
+    </div>
+
+    <div id="choice1">
+    <a href="{% url 'worldcup:worldcup_view' %}">
+    <img src="{% static 'start.png' %}" width=400px, height=auto></a>
+    <a href="{% url 'worldcup:make_contest' %}">
+    <img src="{% static 'makenew.png' %}" width=400px, height=auto></a>
+    </div>
+
 {% endblock %}
 </body>
 </html>
+

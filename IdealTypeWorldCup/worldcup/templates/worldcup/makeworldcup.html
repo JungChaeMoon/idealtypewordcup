@@ -28,7 +28,7 @@
     <br>
     <br>
     <br>
-    <form  method="post" action="{% url 'worldcup:make_quit' %}">
+    <form  method="post" action="{% url 'worldcup:worldcup_view'  %}">
     {% csrf_token %}
         <input type="submit" name="submit" value="만들기 종료!">
     </form>

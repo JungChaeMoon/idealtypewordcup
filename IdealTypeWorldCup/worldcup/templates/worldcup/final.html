@@ -1,5 +1,25 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content%}
     <h1>우승!</h1>
-    <img src="{{ item.photo.url }}" alt="">
+    {% for a in item %}
+        <img src="{{ a.photo.url }}" alt="">
+    {% endfor %}
+
+<div id="againclick", style="padding:30px;">
+    <a href="{% url 'worldcup:worldcup_view'%}">
+    <img src="{% static 'again.png' %}", width=300px, height=auto></a>
+    <br>
+</div>
+
+<div id="shareclick", style="float:right; padding:30px;">
+    <a href="https://www.instagram.com/?hl=ko">
+    <img src="{% static 'share.png' %}", width=300px, height=auto></a>
+    <br>
+</div>
+
+<div id="lastlogo", style="position: relative; left: 400px; top: 700px">
+    <img src="{% static 'last.png' %}", width=700px, height=auto>
+</div>
+
 {% endblock %}
